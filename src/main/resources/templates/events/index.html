@@ -4,12 +4,12 @@
 <body class="container">
 <h1>All Events</h1>
 
-<nav th:replace="fragments :: navigation"></nav>
+<header th:replace="fragments :: header"></header>
 
 
 <p th:unless="${events} and ${events.size()}">No events!</p>
 
-<nav>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -24,6 +24,6 @@
             <td th:text="${event.description}"></td>
         </tr>
     </table>
-</nav>
+
 </body>
 </html>
