@@ -3,11 +3,8 @@ package org.launchcode.codingevents.controllers;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,12 +37,11 @@ public class EventController {
     }
 
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName,
-                              @RequestParam String eventDescription) {
+    public String createEvent(@ModelAttribute Event newEvent) {
 //        events.put("Menteaship","A fun meetup for connecting with mentors");
 //        events.put("Code With Pride","A fun meetup sponsored by LaunchCode");
 //        events.put("Javascripty", "An imaginary meetup for Javascript developers");
-        EventData.add(new Event(eventName, eventDescription));
+        EventData.add(newEvent);
 
         return "redirect:/events";
     }
@@ -55,6 +51,16 @@ public class EventController {
         model.addAttribute("title", "Delete Events");
         model.addAttribute("events", EventData.getAll());
         return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String deleteEvent(@RequestParam(required = false) int [] eventIds) {
+        if(eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
+            return "redirect:/events";
     }
 
 
