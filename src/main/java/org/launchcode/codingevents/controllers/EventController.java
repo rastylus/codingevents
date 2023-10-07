@@ -1,8 +1,10 @@
 package org.launchcode.codingevents.controllers;
 
+import jakarta.validation.Valid;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
@@ -33,14 +35,22 @@ public class EventController {
     @GetMapping("create")
     public String renderCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
+        model.addAttribute("event", new Event());
         return "events/create";
     }
 
     @PostMapping("create")
-    public String createEvent(@ModelAttribute Event newEvent) {
+    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
 //        events.put("Menteaship","A fun meetup for connecting with mentors");
 //        events.put("Code With Pride","A fun meetup sponsored by LaunchCode");
 //        events.put("Javascripty", "An imaginary meetup for Javascript developers");
+        if(errors.hasErrors()) {
+            model.addAttribute("title", " Create Event");
+//            model.addAttribute("errorMsg", "Bad Data!");
+//            model.addAttribute(new Event());
+            return "/events/create";
+        }
+
         EventData.add(newEvent);
 
         return "redirect:/events";
