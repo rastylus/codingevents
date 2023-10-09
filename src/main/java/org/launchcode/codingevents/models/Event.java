@@ -23,27 +23,31 @@ public class Event {
     @NotBlank(message = "Name is required")
     private String contactEmail;
 
-    @NotBlank(message="Location cannot be left blank.")
-    private String location;
+    private EventType type;
 
-    @NotBlank(message = "Registration cannot be left blank")
-    private Boolean registered = true;
+//    @NotBlank(message="Location cannot be left blank.")
+//    private String location;
+//
+//    @NotBlank(message = "Registration cannot be left blank")
+//    private Boolean registered = true;
+//
+//    @NotBlank
+//    @Positive(message = "Number off attendees must be one or more.")
+//    private int numAttendees;
 
-    @NotBlank
-    @Positive(message = "Number off attendees must be one or more.")
-    private int numAttendees;
 
-
-    public Event(String name, String description, String contactEmail, String location,
-                 Boolean registered, int numAttendees) {
+    public Event(String name, String description, String contactEmail,
+                 EventType type) {
+//        , String location,
+//        Boolean registered, int numAttendees)
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.location = location;
-        this.registered = registered;
-        this.numAttendees = numAttendees;
-        this.id = nextId;
-        nextId++;
+        this.type = type;
+//        this.location = location;
+//        this.registered = registered;
+//        this.numAttendees = numAttendees;
     }
 
     public Event() {
@@ -82,29 +86,37 @@ public class Event {
         this.contactEmail = contactEmail;
     }
 
-    public String getLocation() {
-        return location;
+    public EventType getType() {
+        return type;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setType(EventType type) {
+        this.type = type;
     }
-
-    public Boolean getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(Boolean registered) {
-        this.registered = registered;
-    }
-
-    public int getNumAttendees() {
-        return numAttendees;
-    }
-
-    public void setNumAttendees(int numAttendees) {
-        this.numAttendees = numAttendees;
-    }
+//
+//    public String getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(String location) {
+//        this.location = location;
+//    }
+//
+//    public Boolean getRegistered() {
+//        return registered;
+//    }
+//
+//    public void setRegistered(Boolean registered) {
+//        this.registered = registered;
+//    }
+//
+//    public int getNumAttendees() {
+//        return numAttendees;
+//    }
+//
+//    public void setNumAttendees(int numAttendees) {
+//        this.numAttendees = numAttendees;
+//    }
 
     @Override
     public String toString() {
