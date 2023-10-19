@@ -1,16 +1,23 @@
 package org.launchcode.codingevents.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
+/**
+ * Created by Chris Bay
+ */
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
@@ -19,44 +26,20 @@ public class Event {
     @Size(max = 500, message = "Description too long!")
     private String description;
 
-    @Email(message = "Not a valid email")
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
     private EventType type;
 
-//    @NotBlank(message="Location cannot be left blank.")
-//    private String location;
-//
-//    @NotBlank(message = "Registration cannot be left blank")
-//    private Boolean registered = true;
-//
-//    @NotBlank
-//    @Positive(message = "Number off attendees must be one or more.")
-//    private int numAttendees;
-
-
-    public Event(String name, String description, String contactEmail,
-                 EventType type) {
-//        , String location,
-//        Boolean registered, int numAttendees)
-        this();
+    public Event(String name, String description, String contactEmail, EventType type) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.type = type;
-//        this.location = location;
-//        this.registered = registered;
-//        this.numAttendees = numAttendees;
     }
 
-    public Event() {
-        this.id = nextId;
-        nextId++;
-
-    }
-//    public Event() {}
-
+    public Event() {}
 
     public String getName() {
         return name;
@@ -74,10 +57,6 @@ public class Event {
         this.description = description;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getContactEmail() {
         return contactEmail;
     }
@@ -93,30 +72,10 @@ public class Event {
     public void setType(EventType type) {
         this.type = type;
     }
-//
-//    public String getLocation() {
-//        return location;
-//    }
-//
-//    public void setLocation(String location) {
-//        this.location = location;
-//    }
-//
-//    public Boolean getRegistered() {
-//        return registered;
-//    }
-//
-//    public void setRegistered(Boolean registered) {
-//        this.registered = registered;
-//    }
-//
-//    public int getNumAttendees() {
-//        return numAttendees;
-//    }
-//
-//    public void setNumAttendees(int numAttendees) {
-//        this.numAttendees = numAttendees;
-//    }
+
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
