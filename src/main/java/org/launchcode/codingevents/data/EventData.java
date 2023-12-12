@@ -1,6 +1,5 @@
 package org.launchcode.codingevents.data;
 
-import jakarta.validation.Valid;
 import org.launchcode.codingevents.models.Event;
 
 import java.util.Collection;
@@ -24,7 +23,7 @@ public class EventData {
 
 
     //add event
-    public static void add(@Valid Event event) {
+    public static void add(Event event) {
         events.put(event.getId(), event);
     }
 
